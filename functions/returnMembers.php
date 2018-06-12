@@ -32,7 +32,7 @@ retorna todos os members desta id
 
 	else {
 		$query = "SELECT * FROM members WHERE id_consulta=$id_consulta";
-		echo $query;
+		// echo $query;
 		$result = $mysqli->query($query);
 
 		while($row = $result->fetch_array()){
