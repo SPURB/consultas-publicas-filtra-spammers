@@ -15,40 +15,45 @@ function render($element, $number_id_consulta, $number_spamTextToChop, $txtFile)
 		$contetNoSpaces = str_replace(' ', '', $rowsItem['content']);
 		$content['content'] = $contetNoSpaces;
 		$content['memid'] = $rowsItem['memid'];
+		$content['name'] = $rowsItem['name'];
 		return $content;
 	}, $rows);
 
 	$spams = chopTextToArray($number_spamTextToChop, $txtFile);
-	$spam_index = 0;
 
-	foreach ($rowsContent as $key=>$rowContent) {
-		if(checkRepetition($spams[$spam_index], $rowContent['content'])[0] == true){
-			array_push($spammers, $rowContent['memid']);
+
+	echo '<h3>Strings verificados: </h3>
+		<div class="spams">';
+
+	foreach ($spams as $spamKey => $spamValue) {
+		foreach ($rowsContent as $key => $rowContent) {
+			if(checkRepetition($spamValue, $rowContent['content'])[0] == true){
+				array_push($spammers, $rowContent['name']);
+			}
 		}
+		echo '<p>' . $spamValue . '</p>' ;
 	}
+	echo '</div>';
 
-	echo '<h1>Checando string: "' . $spams[$spam_index] . '"</h1>' ;
-	echo '<p>total de spammers: ' . count($spammers) . '</p>';
+	$uniqueSpammers = array_unique($spammers);
+
+	echo '<p>total de spammers: ' . count($uniqueSpammers) . ' | n° de strings verificadas: ' . count($spams) . '</p>';
 	echo '<p>Template: ' . chopTextToArray($number_spamTextToChop, $txtFile, true) . '</p>'; 
-	
-	if($element == 'li'){
-		echo "<ul>";
-		foreach ($spammers as $spammer) {
-			echo "<li>". $spammer . "</li>";
-		}
-		echo "</ul>";
-	}
 
-	elseif($element == 'csv'){
-		echo "<br>";
-		foreach ($spammers as $spammer) {
+	echo "<br>";
+	if($element == 'names'){
+		foreach ($uniqueSpammers as $spammer) {
 			echo  $spammer . ", ";
 		}
 	}
 
+	elseif($element = 'memid'){
+		echo 'memid';
+	}
+
 	else {
 		echo '<pre>';
-		print_r($spammers);
+		print_r($uniqueSpammers);
 		echo '</pre>';
 	}
 }
@@ -62,11 +67,31 @@ function render($element, $number_id_consulta, $number_spamTextToChop, $txtFile)
 			body{
 				max-width:100%
 			}
+			div.spams p{
+				padding: .3em;
+				width: -moz-fit-content;
+				border: 1px solid grey;
+				display: inline-block;
+				margin: .25em;
+			}
 		</style>
 	</head>
 	<body>
 		<?php
-		render('csv', 5, 60, 'spam_templates/spam_1.txt');// ($element, $number_id_consulta, $number_spam, $textToChop)
+
+		if (	
+			isset($_GET['output_type']) && 
+			isset($_GET['id_consulta']) && 
+			isset($_GET['spam_characteres']) && 
+			isset($_GET['textpath'])) {
+			
+			render($_GET['output_type'], $_GET['id_consulta'], $_GET['spam_characteres'], $_GET['textpath']);
+		}
+		else {
+			// echo ``;
+			echo 'por favor adicione os parâmetros "output_type", id_consulta", "spam_characteres" e "textpath" na URL. Exemplo:</br> 
+			http://localhost:7080/consultas-publicas-filtra-spammers/?output_type=names&id_consulta=5&spam_characteres=60&textpath=spam_templates/spam_0.txt';
+		}
 		?>
 	</body>
 </html>

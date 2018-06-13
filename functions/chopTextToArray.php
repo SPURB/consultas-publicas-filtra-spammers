@@ -1,9 +1,9 @@
 <?php
 function chopTextToArray($l = 0, $txtFileLocation, $fullText = false) {
-	// /**
-	// $l -> valor numérico
-	// retorna um array de strings do conteúdo de 'spam.txt' dividido por $numberOfStrings com encoding 'utf-8'
-	//  */
+	/**
+	$l -> valor numérico
+	retorna um array de strings do conteúdo de 'spam.txt' dividido por $numberOfStrings com encoding 'utf-8'
+	 */
 
 	// lê spam.txt
 	$filename = $txtFileLocation;
