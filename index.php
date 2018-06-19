@@ -28,7 +28,12 @@ function render($element, $number_id_consulta, $number_spamTextToChop, $txtFile)
 	foreach ($spams as $spamKey => $spamValue) {
 		foreach ($rowsContent as $key => $rowContent) {
 			if(checkRepetition($spamValue, $rowContent['content'])[0] == true){
-				array_push($spammers, $rowContent['name']);
+				if($element == 'names'){
+					array_push($spammers, $rowContent['name']);
+				}
+				else{
+					array_push($spammers, $rowContent['memid']);
+				}
 			}
 		}
 		echo '<p>' . $spamValue . '</p>' ;
@@ -45,10 +50,6 @@ function render($element, $number_id_consulta, $number_spamTextToChop, $txtFile)
 		foreach ($uniqueSpammers as $spammer) {
 			echo  $spammer . ", ";
 		}
-	}
-
-	elseif($element = 'memid'){
-		echo 'memid';
 	}
 
 	else {

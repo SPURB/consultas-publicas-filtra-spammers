@@ -7,11 +7,8 @@ retorna [false, "nãó é spam"] quando falso
  */
 
 	$toIgnore = [' ','/', '(',')','[',']','*','+', '.', ''];
-
 	$newSmallText = '/' . str_replace($toIgnore, '', $smallText) . '/miXx'; // Regex para remover espaços e ignorar maíusculas 
 	$newlongtext = '/' .  str_replace($toIgnore, '', $longtext)  . '/miXx'; // 
-	// $newSmallText = '/' .  $smallText . '/miXx'; // Regex para remover espaços e ignorar maíusculas 
-	// $newlongtext = '/' 	.  $longtext  . '/miXx'; // 
 
 // ((?!\/).)+
 

@@ -1,1 +1,4 @@
 *.sql
+spammers.txt
+comando_sql.txt
+filter_all.php
