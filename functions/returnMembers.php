@@ -1,14 +1,14 @@
 <?php
 function returnMembers($id_consulta){
 /**
-$id_consulta -> valor numérico de id_consulta do bando de dados
-retorna todos os members desta id
+ * $id_consulta -> valor numérico de id_consulta do bando de dados
+ * retorna todos os members desta id
  */
 	function removeSpaces($str){
 		return $str = substr($str, 0, -2);
 	}
 
-	$properties = "C:/xampp/htdocs/bd.properties";
+	$properties = "C:/xampp/htdocs/bd_local.properties";
 	$propFile = fopen($properties, "r");
 
 	while (!feof($propFile)) {

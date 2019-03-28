@@ -16,6 +16,7 @@ function render($element, $number_id_consulta, $number_spamTextToChop, $txtFile)
 		$content['content'] = $contetNoSpaces;
 		$content['memid'] = $rowsItem['memid'];
 		$content['name'] = $rowsItem['name'];
+		// $content['email'] = $rowsItem['email'];
 		return $content;
 	}, $rows);
 
@@ -28,9 +29,8 @@ function render($element, $number_id_consulta, $number_spamTextToChop, $txtFile)
 	foreach ($spams as $spamKey => $spamValue) {
 		foreach ($rowsContent as $key => $rowContent) {
 			if(checkRepetition($spamValue, $rowContent['content'])[0] == true){
-				if($element == 'names'){
-					array_push($spammers, $rowContent['name']);
-				}
+				if($element == 'names'){ array_push($spammers, $rowContent['name']); }
+				// if($element == 'email'){ array_push($spammers, $rowContent['email']); }
 				else{
 					array_push($spammers, $rowContent['memid']);
 				}

@@ -1,14 +1,14 @@
 <?php
 function checkRepetition($smallText, $longtext){ 
 /**
-$smallText, $longtext -> devem ser strings
-retorna [true, $smallText] quando verdadeiro
-retorna [false, "nãó é spam"] quando falso
- */
+ * $smallText, $longtext -> devem ser strings
+ * retorna [true, $smallText] quando verdadeiro
+ * retorna [false, "nãó é spam"] quando falso
+*/
 
-	$toIgnore = [' ','/', '(',')','[',']','*','+', '.', ''];
+	$toIgnore = [' ','/', '(',')','[',']','*','+', '.', '', '?'];
 	$newSmallText = '/' . str_replace($toIgnore, '', $smallText) . '/miXx'; // Regex para remover espaços e ignorar maíusculas 
-	$newlongtext = '/' .  str_replace($toIgnore, '', $longtext)  . '/miXx'; // 
+	$newlongtext = '/' .  str_replace($toIgnore, '', $longtext) . '/miXx'; // 
 
 // ((?!\/).)+
 
